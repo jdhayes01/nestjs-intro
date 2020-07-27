@@ -26,7 +26,7 @@ export class ProductsService {
     title: string,
     description: string,
     price: number,
-  ) {
+  ): void {
     const [product, index] = this.findProduct(productId);
     const updatedProduct = { ...product };
     if (title) {
@@ -39,6 +39,11 @@ export class ProductsService {
       updatedProduct.price = price;
     }
     this.products[index] = updatedProduct;
+  }
+
+  deleteProduct(productId: string): void {
+    const index = this.findProduct(productId)[1];
+    this.products.splice(index, 1);
   }
 
   private findProduct(prodId: string): [Product, number] {
